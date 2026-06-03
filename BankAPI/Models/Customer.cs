@@ -8,7 +8,7 @@ public class Customer
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string MongoId { get; set; } = "";
+    public ObjectId MongoId { get; set; }
 
     [BsonElement("id")]
     public int Id { get; set; }
