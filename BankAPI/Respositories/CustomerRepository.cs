@@ -1,13 +1,13 @@
-using System.ComponentModel;
 using BankAPI.Models;
 using MongoDB.Driver;
+using SharpCompress.Compressors.Arj;
 
 namespace BankAPI.Repositories;
 
 public class CustomerRepository
 {
     private readonly List<Customer> _customers = [];
-    private readonly IMongoCollection<Customer> _customersDB;
+    private readonly IMongoCollection<Customer> _customersDB;   // Query interface to a remote database
 
     public CustomerRepository(IMongoClient mongoClient, IConfiguration configuration)
     {
@@ -21,36 +21,25 @@ public class CustomerRepository
         return await _customersDB.Find(_ => true).ToListAsync();
     }
 
-    public Customer? GetCustomerById(int id)
+    public async Task<Customer?> GetCustomerById(int id)
     {
-        foreach(Customer cus in _customers)
-        {
-            if(cus.Id == id)
-                return cus;
-        }
-
-        // Could return status codes here instead
-        return null;
+        // Find the customer within the Customer collection (_customerDB) where its id matches the passed id
+        // If not then return null;
+        return await _customersDB.Find(c => c.Id == id).FirstOrDefaultAsync();
     }
 
-    public Customer? GetCustomerByName(string name)
+    public async Task<Customer?> GetCustomerByName(string name)
     {
-        foreach(Customer cus in _customers)
-        {
-            if(cus.Name == name)
-                return cus;
-        }
-
-        // Could implement error codes
-        return null;
+        return await _customersDB.Find(c => c.Name == name).FirstOrDefaultAsync();
     }
 
-    public List<Customer>? GetAllPremiumCustomers()
+    public async Task<List<Customer>?> GetAllPremiumCustomers()
     {
         const float THRESHOLD = 5000f;
         List<Customer> premiumCustomers = [];
+        var customers = await _customersDB.Find(_ => true).ToListAsync();
 
-        foreach(var cus in _customers)
+        foreach(var cus in customers)
         {
             float totalBalance = 0.0f;
 
@@ -69,26 +58,21 @@ public class CustomerRepository
         return premiumCustomers;
     }
 
-    public Customer? CreateCustomer(Customer cus)
+    public async Task<Customer?> CreateCustomer(Customer cus)
     {
-        _customers.Add(cus);
+        await _customersDB.InsertOneAsync(cus);
+
         return cus;
     }
 
-    public Customer? UpdateCustomer(int id, Customer cus)
+    public async Task<Customer?> UpdateCustomer(int id, Customer cus)
     {
-        foreach(var customer in _customers)
-        {
-            if(customer.Id == id)
-            {
-                customer.Name = cus.Name;
-                customer.Email = cus.Email;
-                customer.Accounts = cus.Accounts;
-                return customer;
-            }
-        }
+        var result = await _customersDB.ReplaceOneAsync(c => c.Id == id, cus);
 
-        return null;
+        if (result.MatchedCount == 0)
+            return null;
+
+        return cus;
     }
     
 }

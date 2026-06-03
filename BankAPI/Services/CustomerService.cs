@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using BankAPI.Models;
 using BankAPI.Repositories;
 
@@ -17,30 +18,30 @@ public class CustomerService
         return await _customerRepo.GetAllCustomers();
     }
 
-    public Customer? GetCustomerById(int id)
+    public async Task<Customer?> GetCustomerById(int id)
     {
-        return _customerRepo.GetCustomerById(id);
+        return await _customerRepo.GetCustomerById(id);
     }
 
-    public Customer? GetCustomerByName(string name)
+    public async Task<Customer?> GetCustomerByName(string name)
     {
-        return _customerRepo.GetCustomerByName(name);
+        return await _customerRepo.GetCustomerByName(name);
     }
 
-    public List<Customer>? GetAllPremiumCustomers()
+    public async Task<List<Customer>?> GetAllPremiumCustomers()
     {
-        return _customerRepo.GetAllPremiumCustomers();
+        return await _customerRepo.GetAllPremiumCustomers();
     }
 
-    public Customer? CreateCustomer(Customer cus)
+    public async Task<Customer?> CreateCustomer(Customer cus)
     {
         // Validation here
-        return _customerRepo.CreateCustomer(cus);
+        return await _customerRepo.CreateCustomer(cus);
 
     }
 
-    public Customer? UpdateCustomer(int id, Customer cus)
+    public async Task<Customer?> UpdateCustomer(int id, Customer cus)
     {
-        return _customerRepo.UpdateCustomer(id, cus);
+        return await _customerRepo.UpdateCustomer(id, cus);
     }
 }

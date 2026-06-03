@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using BankAPI.Models;
 using BankAPI.Services;
-using System.Runtime.CompilerServices;
 
 namespace BankAPI.Controllers;
 
@@ -24,9 +23,9 @@ public class CustomerController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Customer> GetCustomerById(int id)
+    public async Task<ActionResult<Customer>> GetCustomerById(int id)
     {
-        var customer = _customerService.GetCustomerById(id);
+        var customer = await _customerService.GetCustomerById(id);
         // This might return null so we can return error codes!
         if(customer == null)
             return NotFound();
@@ -35,9 +34,9 @@ public class CustomerController : ControllerBase
     }
 
     [HttpGet("search")]
-    public ActionResult<Customer> GetCustomerByName(string name)
+    public async Task<ActionResult<Customer>> GetCustomerByName(string name)
     {   
-        var customer = _customerService.GetCustomerByName(name);
+        var customer = await _customerService.GetCustomerByName(name);
         // This might return null so we can return error codes!
 
         if(customer == null)
@@ -47,9 +46,9 @@ public class CustomerController : ControllerBase
     }
 
     [HttpGet("premium")]
-    public ActionResult<List<Customer>> GetAllPremiumCustomers()
+    public async Task<ActionResult<List<Customer>>> GetAllPremiumCustomers()
     {
-        List<Customer>? premiumCustomers = _customerService.GetAllPremiumCustomers();
+        List<Customer>? premiumCustomers = await _customerService.GetAllPremiumCustomers();
 
         if(premiumCustomers == null)
             return NotFound();
@@ -58,9 +57,9 @@ public class CustomerController : ControllerBase
     } 
 
     [HttpPost]
-    public ActionResult<Customer> CreateCustomer(Customer cus)
+    public async Task<ActionResult<Customer>> CreateCustomer(Customer cus)
     {
-        Customer? customer = _customerService.CreateCustomer(cus);
+        Customer? customer = await _customerService.CreateCustomer(cus);
         if(customer == null)
             return NoContent();
 
@@ -68,9 +67,9 @@ public class CustomerController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public ActionResult<Customer> UpdateCustomer(int id, Customer cus)
+    public async Task<ActionResult<Customer>> UpdateCustomer(int id, Customer cus)
     {
-        Customer? customer = _customerService.UpdateCustomer(id, cus);
+        Customer? customer = await _customerService.UpdateCustomer(id, cus);
         if(customer == null)
             return NotFound();
 

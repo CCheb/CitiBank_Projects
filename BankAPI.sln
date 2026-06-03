@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAPI.Tests", "BankAPI.Tests\BankAPI.Tests.csproj", "{6B94ADCA-02C9-4390-9FB1-1E05F9AF09A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAPI", "BankAPI\BankAPI.csproj", "{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{6B94ADCA-02C9-4390-9FB1-1E05F9AF09A6}.Release|x64.Build.0 = Release|Any CPU
 		{6B94ADCA-02C9-4390-9FB1-1E05F9AF09A6}.Release|x86.ActiveCfg = Release|Any CPU
 		{6B94ADCA-02C9-4390-9FB1-1E05F9AF09A6}.Release|x86.Build.0 = Release|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Debug|x64.Build.0 = Debug|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Debug|x86.Build.0 = Debug|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Release|x64.ActiveCfg = Release|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Release|x64.Build.0 = Release|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Release|x86.ActiveCfg = Release|Any CPU
+		{AD1C8D37-AF5F-4581-A75B-34D5D55BACDB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
