@@ -5,7 +5,9 @@ using MongoDB.Driver;
 var builder = WebApplication.CreateBuilder(args);
 
 // MongoDB
-var mongoConnection = builder.Configuration["MongoDbSettings:ConnectionString"];
+var username = builder.Configuration["CITI_MONGO_USERNAME"];
+var password = builder.Configuration["CITI_MONGO_PASSWORD"];
+var mongoConnection = $"mongodb+srv://{username}:{password}@cluster0.ukvh5al.mongodb.net/?appName=Cluster0";
 
 // Services via DI Container
 builder.Services.AddScoped<CustomerRepository>();    // Singleton == shared containers per HTTP request

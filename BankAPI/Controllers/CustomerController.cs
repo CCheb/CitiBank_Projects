@@ -76,4 +76,14 @@ public class CustomerController : ControllerBase
         return Ok(customer);
     }
 
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<Customer>> DeleteCustomer(int id)
+    {
+        Customer? deletedCustomer = await _customerService.DeleteCustomer(id);
+        if(deletedCustomer == null)
+            return NotFound();
+
+        return Ok(deletedCustomer);
+    }
+
 }

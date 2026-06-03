@@ -44,4 +44,9 @@ public class CustomerService
     {
         return await _customerRepo.UpdateCustomer(id, cus);
     }
+
+    public async Task<Customer?> DeleteCustomer(int id)
+    {
+        return await _customerRepo.DeleteCustomer(id);
+    }
 }

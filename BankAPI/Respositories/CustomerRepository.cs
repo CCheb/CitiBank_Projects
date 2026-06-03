@@ -1,6 +1,5 @@
 using BankAPI.Models;
 using MongoDB.Driver;
-using SharpCompress.Compressors.Arj;
 
 namespace BankAPI.Repositories;
 
@@ -73,6 +72,18 @@ public class CustomerRepository
             return null;
 
         return cus;
+    }
+
+    public async Task<Customer?> DeleteCustomer(int id)
+    {
+        var customer = await _customersDB.Find(c => c.Id == id).FirstOrDefaultAsync();
+
+        if (customer == null)
+            return null;
+
+        await _customersDB.DeleteOneAsync(c => c.Id == id);
+
+        return customer;
     }
     
 }
