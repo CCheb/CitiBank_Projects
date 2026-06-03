@@ -18,9 +18,9 @@ public class CustomerController : ControllerBase
     }
 
     [HttpGet]
-    public List<Customer> GetAllCustomers()
+    public async Task<List<Customer>> GetAllCustomers()
     {
-        return _customerService.GetAllCustomers();
+        return await _customerService.GetAllCustomers();
     }
 
     [HttpGet("{id}")]

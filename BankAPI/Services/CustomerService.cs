@@ -12,9 +12,9 @@ public class CustomerService
         _customerRepo = customerRepository;
     }
 
-    public List<Customer> GetAllCustomers()
+    public async Task<List<Customer>> GetAllCustomers()
     {
-        return _customerRepo.GetAllCustomers();
+        return await _customerRepo.GetAllCustomers();
     }
 
     public Customer? GetCustomerById(int id)

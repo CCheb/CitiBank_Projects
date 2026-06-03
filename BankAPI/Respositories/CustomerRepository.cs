@@ -1,53 +1,24 @@
 using System.ComponentModel;
 using BankAPI.Models;
+using MongoDB.Driver;
 
 namespace BankAPI.Repositories;
 
 public class CustomerRepository
 {
     private readonly List<Customer> _customers = [];
+    private readonly IMongoCollection<Customer> _customersDB;
 
-    public CustomerRepository()
+    public CustomerRepository(IMongoClient mongoClient, IConfiguration configuration)
     {
-        Random randValues = new();
-        _customers.Add(new Customer
-        {
-            Id = 1,
-            Name = "John Doe",
-            Email = "Doe@example.com",
-            Accounts = [
-                new Account(randValues.Next(100, 200), randValues.Next(1000, 2000).ToString(), randValues.Next(500, 10000)),
-                new Account(randValues.Next(100, 200), randValues.Next(1000, 2000).ToString(), randValues.Next(500, 10000))
-            ]
-        });
+        var database = mongoClient.GetDatabase(configuration["MongoDbSettings:DatabaseName"]); // Accessing the BankAPI
 
-        _customers.Add(new Customer
-        {
-            Id = 2,
-            Name = "John Wick",
-            Email = "Wick@example.com",
-            Accounts = [
-                new Account(randValues.Next(100, 200), randValues.Next(1000, 2000).ToString(), randValues.Next(500, 10000)),
-                new Account(randValues.Next(100, 200), randValues.Next(1000, 2000).ToString(), randValues.Next(500, 10000))
-            ]
-        });
-
-        _customers.Add(new Customer
-        {
-            Id = 3,
-            Name = "John Smith",
-            Email = "Smith@example.com",
-            Accounts = [
-                new Account(randValues.Next(100, 200), randValues.Next(1000, 2000).ToString(), randValues.Next(500, 10000)),
-                new Account(randValues.Next(100, 200), randValues.Next(1000, 2000).ToString(), randValues.Next(500, 10000))
-            ]
-        });
+        _customersDB = database.GetCollection<Customer>("Customers"); // Equal to a list of the customers 
     }
-    // Add functionalities simulating access to a database here
 
-    public List<Customer> GetAllCustomers()
+    public async Task<List<Customer>> GetAllCustomers()
     {
-        return _customers;
+        return await _customersDB.Find(_ => true).ToListAsync();
     }
 
     public Customer? GetCustomerById(int id)

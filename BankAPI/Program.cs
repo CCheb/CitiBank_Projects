@@ -1,13 +1,18 @@
 using BankAPI.Services;
 using BankAPI.Repositories;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Services
-builder.Services.AddSingleton<CustomerRepository>();    // Singleton == shared containers per HTTP request
+// MongoDB
+var mongoConnection = builder.Configuration["MongoDbSettings:ConnectionString"];
+
+// Services via DI Container
+builder.Services.AddScoped<CustomerRepository>();    // Singleton == shared containers per HTTP request
 builder.Services.AddScoped<CustomerService>(); 
-builder.Services.AddSingleton<AccountRepository>();
+builder.Services.AddScoped<AccountRepository>();
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddSingleton<IMongoClient>(new MongoClient(mongoConnection));
 
 builder.Services.AddControllers();
 
