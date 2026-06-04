@@ -9,3 +9,13 @@ export async function getCustomers() {
 
     return await response.json();
 }
+
+export async function getCustomerById(id) {
+    const response = await fetch(`${API_URL}/customers/${id}`);
+
+    if (!response.ok) {
+        throw new Error("Customer not found");
+    }
+
+    return await response.json();
+}
