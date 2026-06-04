@@ -18,6 +18,19 @@ builder.Services.AddSingleton<IMongoClient>(new MongoClient(mongoConnection));
 
 builder.Services.AddControllers();
 
+// Answering CORS policies
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("BankFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173", "https://citi-bank-vert.vercel.app")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -26,6 +39,7 @@ var app = builder.Build();
 // Swagger middleware
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseCors("BankFrontend");
 
 app.MapControllers();
 
