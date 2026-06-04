@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navBar";
 import { getCustomerById } from "../services/bankApi";
 
 function CustomerSearchPage() {
