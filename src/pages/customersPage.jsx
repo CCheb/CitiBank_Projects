@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navBar";
 import { getCustomers } from "../services/bankApi";
 
 function CustomersPage() {
