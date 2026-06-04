@@ -26,11 +26,7 @@ WORKDIR /app
 # Copy published application
 COPY --from=build /app/publish .
 
-# Configure ASP.NET Core
-ENV ASPNETCORE_URLS=http://+:10000
-
-# Expose port used by Render
-EXPOSE 10000
+EXPOSE 8080
 
 # Start the application
 ENTRYPOINT ["dotnet", "BankAPI.dll"]

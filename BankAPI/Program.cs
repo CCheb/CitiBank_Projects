@@ -4,6 +4,10 @@ using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+
+builder.WebHost.UseUrls($"http://*:{port}");
+
 // MongoDB
 var username = builder.Configuration["CITI_MONGO_USERNAME"];
 var password = builder.Configuration["CITI_MONGO_PASSWORD"];
