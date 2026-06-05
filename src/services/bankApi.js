@@ -38,3 +38,18 @@ export async function createCustomer(customer) {
 
     return await response.json();
 }
+
+export async function deleteCustomer(id) {
+    const response = await fetch(
+        `${API_URL}/customers/${id}`,
+        {
+            method: "DELETE"
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Customer not found");
+    }
+
+    return await response.json();
+}

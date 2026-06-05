@@ -7,6 +7,7 @@ function Navbar() {
             <Link to="/customers">Customers</Link>{" "}
             <Link to="/customers/search">Search Customer</Link>{" "}
             <Link to="/customers/create">Create Customer</Link>
+            <Link to="/customers/delete">Delete Customer</Link>
         </nav>
     );
 }

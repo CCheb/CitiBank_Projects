@@ -4,6 +4,7 @@ import HomePage from "./pages/homePage";
 import CustomersPage from "./pages/customersPage";
 import CustomerSearchPage from "./pages/customerSearchPage";
 import CustomerCreatePage from "./pages/customerCreatePage";
+import CustomerDeletePage from "./pages/customerDeletePage";
 
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
         <Route path="/customers" element={<CustomersPage />} />
         <Route path="/customers/search" element={<CustomerSearchPage />} />
         <Route path="/customers/create" element={<CustomerCreatePage />} />
+        <Route path="/customers/delete" element={<CustomerDeletePage />} />
+        
       </Routes>
     </BrowserRouter>
   );
