@@ -19,3 +19,22 @@ export async function getCustomerById(id) {
 
     return await response.json();
 }
+
+export async function createCustomer(customer) {
+    const response = await fetch(
+        `${API_URL}/customers`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(customer)
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to create customer");
+    }
+
+    return await response.json();
+}
