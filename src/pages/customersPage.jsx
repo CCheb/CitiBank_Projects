@@ -28,7 +28,7 @@ function CustomersPage() {
                 <ul>
                     {customers.map(customer => (
                         <li key={customer.id}>
-                            {customer.name}
+                            ID: {customer.id} - {customer.name}
                         </li>
                     ))}
                 </ul>
